@@ -26,6 +26,7 @@ export default function CampgroundIndex(props) {
                 <title>Campgrounds</title>
             </Head>
             <h1 className="text-2xl bold">All Campgrounds</h1>
+            <Link href="/campgrounds/new">Add new campground</Link>
             <ul>
                 {props.camps.map((camp) => (
                     <li key={camp._id}>
