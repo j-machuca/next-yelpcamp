@@ -40,6 +40,13 @@ export default async function handler(req, res) {
             res.status(202).json(camp);
             break;
 
+        case "DELETE":
+            camp = await Campground.findByIdAndDelete(id);
+            if (camp) {
+                return res.status(204).send();
+            }
+            return res.status(400).json({ msg: "Bad request" });
+
         default:
             return res.status(405).end(`Method ${req.method} Not Allowed`);
     }

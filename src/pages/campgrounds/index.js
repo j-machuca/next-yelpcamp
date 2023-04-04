@@ -3,6 +3,7 @@ import dbConnect from "@/lib/mongo";
 import Campground from "@/models/campground";
 import Link from "next/link";
 import { docToString } from "../../utils/utils";
+import { useRouter } from "next/router";
 
 export async function getStaticProps(ctx) {
     await dbConnect();
@@ -20,6 +21,10 @@ export async function getStaticProps(ctx) {
 }
 
 export default function CampgroundIndex(props) {
+    const router = useRouter();
+
+    const msg = router.query.msg ? <p>{router.query.msg}</p> : null;
+
     return (
         <>
             <Head>
@@ -27,6 +32,7 @@ export default function CampgroundIndex(props) {
             </Head>
             <h1 className="text-2xl bold">All Campgrounds</h1>
             <Link href="/campgrounds/new">Add new campground</Link>
+            {msg}
             <ul>
                 {props.camps.map((camp) => (
                     <li key={camp._id}>
